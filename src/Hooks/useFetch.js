@@ -2,11 +2,11 @@ import axios from "axios";
 import React from "react";
 
 
-const baseUrl = 'https://news67.p.rapidapi.com/v2/topic-search';
+const baseUrl = 'https://newsapi.org/v2/everything?q=apple&from=2023-12-16&to=2023-12-16&sortBy=popularity&apiKey=ca2d967d92ce4b43a5330195a8880bb1';
 
 
 
-export const useFetch = (lan, search) => {
+export const useFetch = (search) => {
 
     const [data, setData] = React.useState([])
     const [loading, setLoading] = React.useState(true)
@@ -15,13 +15,8 @@ export const useFetch = (lan, search) => {
         try {
             const data = await axios.get(baseUrl, {
                 params: {
-                    languages: lan,
                     search: search
-                },
-                headers: {
-                    'X-RapidAPI-Key': '079bd4e1cfmshd0eea7848348498p1712dejsn78a10cd19614',
-                    'X-RapidAPI-Host': 'news67.p.rapidapi.com'
-                }
+                }  
             })
             console.log(data.data)
             setLoading(false)

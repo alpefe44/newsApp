@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Dimensions, ScrollView } from 'react-native'
+import { View, Text, FlatList, Dimensions, ScrollView, ActivityIndicator } from 'react-native'
 import React from 'react'
 import useFetch from '../Hooks/useFetch'
 import NewDetail from '../Components/NewDetail'
@@ -8,10 +8,16 @@ const data = [1, 2, 3, 4]
 const { width, height } = Dimensions.get('window');
 const HomeScreen = () => {
 
-    // const [lan, setLan] = React.useState("en")
-    // const [search, setSearch] = React.useState("war")
+    const [search, setSearch] = React.useState("apple")
 
-    // const { data, loading } = useFetch(lan, search)
+    const { data, loading } = useFetch(search)
+
+
+    if (!loading) {
+        return (
+            <ActivityIndicator></ActivityIndicator>
+        )
+    }
 
     return (
         <ScrollView>
@@ -20,6 +26,7 @@ const HomeScreen = () => {
                     <Text style={{ fontWeight: 'bold', fontSize: 22 }}>The NEWS <Icon name="newspaper" size={28} color="black" /></Text>
                 </View>
                 {
+                    loading &&
                     data.map((item, index) => {
                         return (
                             <NewDetail item={item}></NewDetail>
